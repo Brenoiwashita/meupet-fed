@@ -1,39 +1,43 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { Injectable } from '@angular/core';
 
-@Injectable({ providedIn: "root" })
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthService {
-  token$ = new BehaviorSubject<string | null>(
-    localStorage.getItem("meupet_token")
-  );
-  constructor() {
-    window.addEventListener("message", (event) =>
-      this.acceptMessage(event.data)
-    );
-    document.addEventListener("message" as any, (event: any) =>
-      this.acceptMessage(event.data)
-    );
+  private readonly TOKEN_KEY = 'meupet_token';
+
+  getToken(): string | null {
+    return localStorage.getItem(this.TOKEN_KEY);
   }
-  private acceptMessage(raw: any) {
-    try {
-      const data = typeof raw === "string" ? JSON.parse(raw) : raw;
-      if (data?.type === "MEUPET_AUTH" && data.token) this.setToken(data.token);
-    } catch {}
+
+  setToken(token: string): void {
+    localStorage.setItem(this.TOKEN_KEY, token);
   }
-  setToken(token: string) {
-    localStorage.setItem("meupet_token", token);
-    this.token$.next(token);
+
+  removeToken(): void {
+    localStorage.removeItem(this.TOKEN_KEY);
   }
-  clear() {
-    localStorage.removeItem("meupet_token");
-    this.token$.next(null);
+
+  isAuthenticated(): boolean {
+    const token = this.getToken();
+
+    return !!token;
   }
-  get token() {
-    return this.token$.value;
+
+  requestNativeLogin(): void {
+    const rn = (window as any).ReactNativeWebView;
+
+    if (rn) {
+      rn.postMessage(
+        JSON.stringify({
+          type: 'MEUPET_LOGIN_GOOGLE',
+        })
+      );
+    }
   }
-  requestNativeLogin() {
-    (window as any).ReactNativeWebView?.postMessage(
-      JSON.stringify({ type: "MEUPET_LOGIN_GOOGLE" })
-    );
+
+  logout(): void {
+    this.removeToken();
+    window.location.href = '/login';
   }
 }
