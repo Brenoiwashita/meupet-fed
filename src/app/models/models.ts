@@ -1,4 +1,50 @@
-export interface Pet { _id?: string; name:string; species:string; breed?:string; sex?:string; birthDate?:string; approximateAge?:number; color?:string; weight?:number; size?:string; neutered?:boolean; microchip?:string; allergies?:string[]; conditions?:string[]; continuousMedications?:string[]; photoUrl?:string; }
-export type RecordType = 'consultation'|'exam'|'vaccine'|'medication'|'weight'|'preventive'|'procedure'|'document'|'food'|'note';
-export interface PetRecord { _id?:string; petId:string; type:RecordType; title:string; date:string; nextDate?:string; status?:'ok'|'upcoming'|'overdue'|'active'|'done'; notes?:string; clinic?:string; veterinarian?:string; metadata?:Record<string, unknown>; attachments?:Attachment[]; }
-export interface Attachment { _id?:string; name:string; mimeType:string; url:string; size?:number; }
+export interface Pet {
+  _id?: string;
+  name: string;
+  species: string;
+  breed?: string;
+  sex?: string;
+  birthDate?: string;
+  approximateAge?: number;
+  color?: string;
+  weight?: number;
+  size?: string;
+  neutered?: boolean;
+  microchip?: string;
+  allergies?: string[];
+  conditions?: string[];
+  continuousMedications?: string[];
+  photoUrl?: string;
+}
+export type RecordType =
+  | "consultation"
+  | "exam"
+  | "vaccine"
+  | "medication"
+  | "weight"
+  | "preventive"
+  | "procedure"
+  | "document"
+  | "food"
+  | "note";
+export interface PetRecord {
+  _id?: string;
+  petId: string;
+  type: RecordType;
+  title: string;
+  date: string;
+  nextDate?: string;
+  status?: "ok" | "upcoming" | "overdue" | "active" | "done";
+  notes?: string;
+  clinic?: string;
+  veterinarian?: string;
+  metadata?: Record<string, unknown>;
+  attachments?: Attachment[];
+}
+export interface Attachment {
+  _id?: string;
+  name: string;
+  mimeType: string;
+  url: string;
+  size?: number;
+}
