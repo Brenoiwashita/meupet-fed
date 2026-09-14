@@ -1,0 +1,2 @@
+import { Component } from '@angular/core'; import { RouterLink,RouterLinkActive } from '@angular/router';
+@Component({selector:'app-bottom-nav',standalone:true,imports:[RouterLink,RouterLinkActive],template:`<nav class="bottom-nav"><a routerLink="/home" routerLinkActive="active">⌂<br>Home</a><a routerLink="/home" routerLinkActive="active">♡<br>Pets</a><a routerLink="/home">▣<br>Agenda</a><a routerLink="/home">▤<br>Docs</a><a routerLink="/home">☺<br>Perfil</a></nav>`}) export class BottomNavComponent{}
