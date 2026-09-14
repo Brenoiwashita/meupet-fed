@@ -5,9 +5,7 @@ import { Pet, PetRecord } from "../models/models";
 
 @Injectable({ providedIn: "root" })
 export class ApiService {
-  private readonly base =
-    (window as any).__MEUPET_API_URL__ ||
-    "https://meupet-api.vercel.app/api";
+  private readonly base = "https://meupet-api.vercel.app/api";
 
   constructor(private http: HttpClient) {}
 
