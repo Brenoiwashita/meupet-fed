@@ -3,11 +3,10 @@ import { CommonModule } from "@angular/common";
 import { RouterLink, Router } from "@angular/router";
 import { ApiService } from "../../core/api.service";
 import { Pet, PetRecord } from "../../models/models";
-import { BottomNavComponent } from "../../shared/bottom-nav.component";
 @Component({
   selector: "app-home",
   standalone: true,
-  imports: [CommonModule, RouterLink, BottomNavComponent],
+  imports: [CommonModule, RouterLink],
   template: `<main class="page">
       <header class="topbar">
         <div>
@@ -92,8 +91,7 @@ import { BottomNavComponent } from "../../shared/bottom-nav.component";
           </div>
         </div>
       </section>
-    </main>
-    <app-bottom-nav />`,
+    </main>`,
 })
 export class HomeComponent implements OnInit {
   pets: Pet[] = [];
